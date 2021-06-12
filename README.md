@@ -2,13 +2,13 @@
 
 A Python3 wrapper around the [v3 Heroku API](https://devcenter.heroku.com/categories/platform-api).
 
-- [DESCRIPTION](#description)
-- [INSTALLATION](#installation)
-- [EXAMPLE USAGE](#example-usage)
-- [ACKNOWLEDGEMENTS](#acknowledgements)
-- [REFERENCE](API_REFERENCE.md)
+- [Description](#description)
+- [Installation](#installation)
+- [Example Usage](#example-usage)
+- [Acknowledgements](#acknowledgements)
+- [Reference](API_REFERENCE.md)
 
-# DESCRIPTION
+# Description
 
 heroku-py is a Python3 wrapper around some of the [v3 Heroku API](https://devcenter.heroku.com/categories/platform-api) endpoints.
 
@@ -16,16 +16,13 @@ heroku-py currently only exposes most of the common endpoints that you probably 
 everyday during development such as performing CRUD operations on an app and deploying
 builds of versions of your source code.
 
-The [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) contains much
-more powerful features for interacting with your apps.
-
-# INSTALLATION
+# Installation
 
 ```
 $ pip3 install heroku-py
 ```
 
-# EXAMPLE USAGE
+# Example Usage
 
 After [installation](#installation),
 
@@ -135,7 +132,7 @@ To delete an app,
 
 Check out [API Reference](API_REFERENCE.md).
 
-# ACKNOWLEDGEMENTS
+# Acknowledgements
 
 - [Richard Okonicha](https://github.com/konichar) whose initiative I developed upon
   to build this package.

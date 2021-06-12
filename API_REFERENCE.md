@@ -1,4 +1,4 @@
-# heroku\-py REFERENCE
+# heroku\-py Reference
 
 _class_ _heroku_py_\.**HerokuClient**(_api_key_=_None_)
 
