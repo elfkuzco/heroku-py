@@ -42,6 +42,22 @@ def test_update_app():
     assert app["maintenance"] == maintenance
 
 
+def test_create_config():
+    config_vars = hk.create_config(new_name, DEBUG=True, SECRET_KEY="xxxxxxxxxxxx")
+    assert config_vars["DEBUG"] == "true"
+    assert config_vars["SECRET_KEY"] == "xxxxxxxxxxxx"
+
+
+def test_update_config():
+    config_vars = hk.update_config(new_name, SECRET_KEY="some_random_key")
+    assert config_vars["SECRET_KEY"] == "some_random_key"
+
+
+def test_delete_config():
+    config_vars = hk.delete_config(new_name, "DEBUG")
+    assert "DEBUG" not in config_vars
+
+
 def test_delete_app():
     app = hk.delete_app(new_name)
     assert app["name"] == new_name

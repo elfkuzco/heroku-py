@@ -73,7 +73,7 @@ class HerokuClient:
         """
         response = requests.get(f"{HEROKU_API_URL}", headers=self.headers)
         handle_error(response)
-        return response.json()
+        return [app["name"] for app in response.json()]
 
     def update_app(self, app_name_or_id, *, new_name=None, maintenance=None):
         """
@@ -166,3 +166,49 @@ class HerokuClient:
         return self.build_from_source(
             app_name_or_id, tarball_url, version=version, delay=delay
         )
+
+    def get_app_config(self, app_name_or_id):
+        """Get config-vars for the app"""
+        response = requests.get(
+            f"{HEROKU_API_URL}/{app_name_or_id}/config-vars", headers=self.headers
+        )
+        handle_error(response)
+        return response.json()
+
+    def _create_or_update(self, app_name_or_id, **config_vars):
+        """Base helper to create or update application config vars.
+        config_vars: keyword arguments of config variables to be created or updated
+        """
+        if config_vars.keys():
+            response = requests.patch(
+                f"{HEROKU_API_URL}/{app_name_or_id}/config-vars",
+                headers=self.headers,
+                json=config_vars,
+            )
+            handle_error(response)
+            return response.json()
+        else:
+            raise HerokuException("No config vars passed in")
+
+    def update_config(self, app_name_or_id, **config_vars):
+        """Update an existing config variable."""
+        return self._create_or_update(app_name_or_id, **config_vars)
+
+    def delete_config(self, app_name_or_id, *config_vars):
+        """Delete a config variable.
+        config_vars: names of config vars to be deleted"""
+        if config_vars:
+            payload = {c: None for c in config_vars}
+            response = requests.patch(
+                f"{HEROKU_API_URL}/{app_name_or_id}/config-vars",
+                headers=self.headers,
+                json=payload,
+            )
+            handle_error(response)
+            return response.json()
+        else:
+            raise HerokuException("No config vars passed in.")
+
+    def create_config(self, app_name_or_id, **config_vars):
+        """Create a config variable for the application."""
+        return self._create_or_update(app_name_or_id, **config_vars)

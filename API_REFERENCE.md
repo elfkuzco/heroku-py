@@ -54,3 +54,18 @@ Methods in the client include:
 
         git_url: github repository url of the source code.
         branch: the git branch to get the source code from. Defaults to `main`.
+
+    get_app_config(app_name_or_id):
+        Get the applications config-vars
+
+    create_config(app_name_or_id, **config_vars):
+        Create new config vars for the app. Will update existing config vars if an
+        existing key is found in config_vars.
+        config_vars should be passed in as keyword arguments
+
+    update_config(app_name_or_id, **config_vars):
+        Update an application's existing config-vars.
+
+    delete_config(app_name_or_id, *config_vars):
+        Delete application's config vars.
+        config_vars: string names of the application's existing variables
